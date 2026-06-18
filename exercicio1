@@ -1,0 +1,10 @@
+def somar_valores(parametro1, parametro2):
+    """Docstring: descreve o que a função faz"""
+    #corpo da função
+    resultado = parametro1 + parametro2
+    return resultado
+
+# a palavra chave def inicia toda a definiçao de função 
+
+soma = somar_valores(2, 3)
+print(soma)
