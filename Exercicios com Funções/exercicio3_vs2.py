@@ -24,4 +24,12 @@ def coluna4():
     for i in range(altura):                             
         print(f'|{d}{" " * (largura - len(d))}|')
 
-print(linha(),coluna1(),linha(), coluna2(), linha(), coluna3(), linha(), coluna4(), linha())
+linha()
+coluna1()
+linha()
+coluna2()
+linha()
+coluna3()
+linha()
+coluna4()
+linha()
