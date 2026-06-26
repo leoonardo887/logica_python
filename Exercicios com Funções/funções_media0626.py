@@ -3,7 +3,7 @@ def calcular_media():
     soma = 0
     for numero in numeros:
         soma += numero 
-    media = soma / len(numeros)
+    media = soma / qtd_numeros
     return media
 
 numeros = []
