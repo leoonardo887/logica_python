@@ -1,8 +1,9 @@
-A = float(input("Qual o número que multiplica x ao quadrado? "))
-B = float(input("Qual o número que multiplica x? "))
-C =float(input("Qual o número que multiplica x^0? "))
-delta = ((B**2 - 4*A*C)**0.5)
-bhaskara1 = (-B + (delta))/(2*A)
-bhaskara2 = (-B - (delta))/(2*A)
+a = float(input("Digite o número que acompanha x²: "))
+b = float(input("Digite o número que acomapnha x: "))
+c = float(input("Digite o termo independente: "))
 
-print(f'A primeira raiz da equação é {bhaskara1} e a segunda raiz é {bhaskara2}.')
+delta = b**2 -4*a*c
+bhaskara1 = (-b + delta**0.5) / (2*a)
+bhaskara2 = (-b - delta**0.5) / (2*a)
+
+print("O primeiro x vale", bhaskara1, "e o segundo vale", bhaskara2)
