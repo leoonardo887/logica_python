@@ -15,6 +15,10 @@ while True:
     linha_escolhida = int(input("Digite que linha você deseja (1-3): "))
     coluna_escolhida = int(input("Digite que coluna você deseja (1-3): "))
 
+    if linha_escolhida < 1 or linha_escolhida > 3 or coluna_escolhida < 1 or coluna_escolhida > 3:
+      print("Escolha valores entre 1 e 3.")
+      continue
+
     if tabuleiro[linha_escolhida-1][coluna_escolhida-1] != " ":
        print("Este local já está ocupado. ")
        continue
@@ -57,4 +61,4 @@ while True:
     if jogador == "X":
        jogador = "O"                    #momento em que ele alterna entre o jogador X e O
     else:
-       jogador = "X"
+       jogador = "X"     #costuma-se preferir break para sair de um laço e reservar sys.exit() (ou exit() em situações simples) para quando se deseja encerrar o programa inteiro .Isso torna #                  o código mais flexível caso você queira, por exemplo, mostrar uma mensagem de fim de jogo ou perguntar se o usuário deseja jogar novamente após o while.
