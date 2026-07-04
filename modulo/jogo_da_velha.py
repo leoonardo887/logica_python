@@ -4,7 +4,6 @@ linhas = 3
 colunas = 3
 
 jogador = "X"
-soma = 0
 
 for i in range(linhas):
   linha = []
@@ -22,7 +21,6 @@ while True:
 
     tabuleiro[linha_escolhida-1][coluna_escolhida-1] = jogador
 
-
     soma = 0
 
     for linha in tabuleiro:
@@ -33,24 +31,24 @@ while True:
         print()
 
     for i in range(3):
-       if tabuleiro[i][0] == tabuleiro [i][1] == tabuleiro [i][2] != " ":
+       if tabuleiro[i][0] == tabuleiro [i][1] == tabuleiro [i][2] != " ":              #vence por linha
           print('O jogador', jogador, "venceu!")
           exit()
        
     for i in range(3):
-       if tabuleiro[0][i] == tabuleiro [1][i] == tabuleiro [2][i] != " ":
+       if tabuleiro[0][i] == tabuleiro [1][i] == tabuleiro [2][i] != " ":              #vence por coluna
           print('O jogador', jogador, "venceu!")
           exit()
 
     for i in range(3):
-       if tabuleiro[0][0] == tabuleiro[2][2] == tabuleiro [1][1] != " ":
-          print("O jogador", jogador, "Venceu!")
-          exit()
+       if tabuleiro[0][0] == tabuleiro[2][2] == tabuleiro [1][1] != " ":               #vence por diagonal:  [1][0][0]
+          print("O jogador", jogador, "Venceu!")                                                           # [0][1][0]
+          exit()                                                                                           # [0][0][1]
 
     for i in range(3):
-        if tabuleiro[0][2] == tabuleiro[1][1] == tabuleiro[2][0] != " ":
-            print("O jogador", jogador, "venceu!")
-            exit()
+        if tabuleiro[0][2] == tabuleiro[1][1] == tabuleiro[2][0] != " ":                #vence por diagonal: [0][0][1]
+            print("O jogador", jogador, "venceu!")                                                         # [0][1][0]
+            exit()                                                                                         # [1][0][0]
 
     if soma == 9:
         print("Empate")
