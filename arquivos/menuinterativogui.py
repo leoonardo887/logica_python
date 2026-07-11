@@ -10,80 +10,131 @@ def colunas():
         else:
             print(f"|{largura*" "}|")
 
-def menu():
-    print("\nMenu: ")
-    print("0 - Adicionar Filme (Opcional)")
-    print("1 - Quantidade total de filmes")
-    print("2- Informações de um filme pelo título")
-    print("3 - Filmes de um diretor específico")
-    print("4 - Filmes de um gênero específico")
-    print("5 - Média de duração dos filmes")
-    print("6 - Sair")
+def adicionar_filme():
+    """Adiciona filmes ao Arq_Filmes.txt com todas as suas informações"""
+    while True:
+
+            titulo = input("Escreva o título do filme: ")
+
+            if titulo == "":
+                break
+
+            diretor = input("Escreva o nome do diretor: ")
+            genero = input("Escreva o gênero do filme: ")
+            tempo = input("Escreva quantos minutos de duração tem o filme: ")
+
+            with open("Arq_Filmes.txt", "a", encoding="utf-8") as f:
+                f.write(f"{titulo} - {diretor} - {genero} - {tempo}\n")
+
+    print("Filme adicionado com sucesso!")
+
+def quantidade_de_filmes():
+        """Conta e imprime a quantidade de filmes presentes no arquivo."""
+        with open("Arq_Filmes.txt", "r", encoding="utf-8") as f:
+            quantidade = len(f.readlines())
+            print(f"Quantidade de filmes: {quantidade}")
+
+def informacao_filme():
+    """Imprime todas as principais informações dos filmes arquivados."""
+    titulo_procurado = input("Digite o titulo do filme: ")
+
+    with open("Arq_Filmes.txt", "r", encoding="utf-8") as f:
+        encontrado = False
+
+        for linha in f:
+            dados = linha.strip().split(" - ")
+
+            if dados[0].lower() == titulo_procurado.lower():
+                print(f"Título: {dados[0]}")
+                print(f"Diretor: {dados[1]}")
+                print(f"Gênero: {dados[2]}")
+                print(f"Duração: {dados[3]} minutos")
+                encontrado = True
+                break
+
+        if not encontrado:
+            print("Filme não encontrado.")
+
+def diretor_filme():
+    """Imprime todos os filmes arquivados dirigidos pelo diretor escolhido."""
+    diretor_procurado = input("Digite o diretor do filme: ")
+
+    with open("Arq_Filmes.txt", "r", encoding="utf-8") as f:
+        encontrado = False
+
+        for linha in f:
+            dados = linha.strip().split(" - ")
+
+            if dados[1].lower() == diretor_procurado.lower():
+                print(f"Título: {dados[0]}")
+                encontrado = True
+
+        if not encontrado:
+                print("Nenhum filme encontado no nome desse diretor.")
+
+def genero_filme():
+    """Imprime todos os filmes arquivados que pertençam ao gênero escolhido."""
+    genero_procurado = input("Digite o gênero do filme: ")
+
+    with open("Arq_Filmes.txt", "r", encoding="utf-8") as f:
+        encontrado = False
+
+        for linha in f:
+            dados = linha.strip().split(" - ")
+
+            if dados[2].lower() == genero_procurado.lower():
+                print(f"Título: {dados[0]}")
+                encontrado = True
+
+        if not encontrado:
+                print("Nenhum filme encontado com esse gênero.")
+
+def media_filmes():
+    """Calcula a média de duração em minutos de todos os filmes arquivados."""
+    soma_duracao = 0
+    quantidade = 0
+
+    with open("Arq_Filmes.txt", "r", encoding="utf-8") as f:
+        for linha in f:
+            dados =linha.strip().split(" - ")
+
+            duracao = int(dados[3])
+            soma_duracao += duracao
+            quantidade += 1
+
+        if quantidade > 0:
+            media = soma_duracao / quantidade
+            print(f"A média de duração dos filmes é de {media:.2f} minutos.")
+        else:
+            print("Não existem filmes arquivados.")
 
 altura = 1
 largura = 40
 
 palavras = ("Adicionar Filme - 0", "Quantidade total de filmes - 1", "Informações de um filme pelo titulo - 2", "Filmes de um diretor específico - 3", "Filmes de um gênero específico - 4", "Média de duração dos filmes - 5", "Sair - ")
 
-titulos = []
-diretores = []
-generos = []
-duracao = []
+if __name__ == "__main__":
 
-for palavra in palavras:
+    for palavra in palavras:
+        linhas()
+        colunas()
     linhas()
-    colunas()
-linhas()
 
 while True:
 
     opcao = int(input("O que você deseja fazer: "))
 
     if opcao == 0:
-        while True:
-            titulo = input("Escreva o título do filme: ")
-
-            if titulo == "":
-                break
-
-            titulos.append(titulo)
-
-            diretor = input("Escreva o nome do diretor: ")
-
-            if diretor == "":
-                break
-
-            diretores.append(diretor)
-
-            genero = input("Escreva o gênero do filme: ")
-
-            if genero == "":
-                break
-
-            generos.append(genero)
-
-            tempo = input("Escreva quantos minutos de duração tem o filme: ")
-
-            if tempo == "":
-                break
-
-            duracao.append(tempo)
-
-        with open("Arq_Filmes.txt", "w") as f:
-            for i in range(len(titulos)):
-                f.write(f"{titulos[i]} - {diretores[i]} - {generos[i]} - {duracao[i]}\n")
-
-        continue
-
-    if  opcao == 1:
-        print(len(titulos))
-        continue
-
-    if opcao == 2:
-
-        titulo_procurado = input("Digite o titulo do filme:")
-
-        with open("Arq_Filmes.txt", "r") as f:
-
-
-        continue
+        adicionar_filme()
+    elif  opcao == 1:
+        quantidade_de_filmes()
+    elif opcao == 2:
+        informacao_filme()
+    elif opcao == 3:
+        diretor_filme()
+    elif opcao == 4:
+        genero_filme()
+    elif opcao == 5:
+        media_filmes()
+    elif opcao == 6:
+        break
