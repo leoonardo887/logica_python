@@ -14,9 +14,9 @@ def adicionar_filme():
     """Adiciona filmes ao Arq_Filmes.txt com todas as suas informações"""
     while True:
 
-            titulo = input("Escreva o título do filme: ")
+            titulo = input("Escreva o título do filme: (Digite *Pare* para sair)")
 
-            if titulo == "":
+            if titulo == "Pare":
                 break
 
             diretor = input("Escreva o nome do diretor: ")
@@ -111,7 +111,7 @@ def media_filmes():
 altura = 1
 largura = 40
 
-palavras = ("Adicionar Filme - 0", "Quantidade total de filmes - 1", "Informações de um filme pelo titulo - 2", "Filmes de um diretor específico - 3", "Filmes de um gênero específico - 4", "Média de duração dos filmes - 5", "Sair - ")
+palavras = ("Adicionar Filme - 0", "Quantidade total de filmes - 1", "Informações de um filme pelo titulo - 2", "Filmes de um diretor específico - 3", "Filmes de um gênero específico - 4", "Média de duração dos filmes - 5", "Sair - 6")
 
 if __name__ == "__main__":
 
@@ -122,19 +122,23 @@ if __name__ == "__main__":
 
 while True:
 
-    opcao = int(input("O que você deseja fazer: "))
+    opcao = input("O que você deseja fazer: ")        #Menu. 
 
-    if opcao == 0:
-        adicionar_filme()
-    elif  opcao == 1:
+    if opcao == "0":
+        adicionar_filme()           #onde chamam as funções. 
+    elif  opcao == "1":
         quantidade_de_filmes()
-    elif opcao == 2:
+    elif opcao == "2":
         informacao_filme()
-    elif opcao == 3:
+    elif opcao == "3":
         diretor_filme()
-    elif opcao == 4:
+    elif opcao == "4":
         genero_filme()
-    elif opcao == 5:
+    elif opcao == "5":
         media_filmes()
-    elif opcao == 6:
+    elif opcao == "6":
         break
+    elif opcao > "6":
+        print("Número maior que o desejado. (0-6)")
+    elif opcao < "0":
+        print("Número menor que o desejado. (0-6)")
