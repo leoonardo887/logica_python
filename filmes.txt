@@ -1,4 +1,3 @@
-
-
 titanic, drama, 200, leonardo dicaprio
 pokemon, ficção, 0, ash
+vida do leo, drama, 230, rafael
