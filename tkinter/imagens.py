@@ -1,0 +1,17 @@
+import tkinter as tk
+from tkinter import ttk
+
+
+root = tk.Tk()
+root.title("SENAI - Sistemas")
+root.geometry("800x600")
+
+minha_imagem = tk.PhotoImage(file="mcqueen.png")
+
+label = tk.Label(root, image=minha_imagem)
+label.pack(expand=True)
+#O código vai aqui!!
+
+root.mainloop()
+
+#Tem que ter a imagem baixada antes de executar o arquivo 
