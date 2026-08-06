@@ -24,8 +24,8 @@ tk.button(
 tk.Button(
     root,
     text="Span 2 rows",
+    width=20,
     height=10
-    width=20
 ).grid(row=0, column=3, rowspan=2, sticky="ns", padx=2, pady=2)
 
 
