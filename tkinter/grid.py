@@ -28,5 +28,6 @@ tk.Button(
     height=10
 ).grid(row=0, column=3, rowspan=2, sticky="ns", padx=2, pady=2)
 
+#grid é a localização do elemento dentro da janela, onde pode dividi-la em várias partes, e dividir tudo por linhas. 
 
 root.mainloop()
