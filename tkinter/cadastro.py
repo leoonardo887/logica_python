@@ -6,8 +6,7 @@ root = tk.Tk()
 root.title("SENAI - Sistemas")
 
 def mostrar_nome():
-    messagebox.showinfo('titulo',f"Seu nome é {entry_nome.get()}")
-
+    messagebox.showinfo('titulo',f"Seja bem vindo {entry_nome.get()}!\nSeu gênero é {combo_gen.get()}\nSeus olhos são {combo_cor.get()}\nSua altura é {entry_alt.get()}\nE seu peso é {entry_peso.get()}. ")
 minha_imagem = tk.PhotoImage(file="perfil sem imagem.png").subsample(3, 3)  
 
 #diminui o tamanho da imagem pela metade
