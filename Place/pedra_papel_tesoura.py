@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 import tkinter.ttk as ttk
 
+#pip install pillow
+from PIL import Image, ImageTk
+
 # Cores
 cor0 = "#FFFFFF"  # branco
 cor1 = "#333333"  # preto
@@ -82,5 +85,25 @@ app_empate = tk.Label(frame_cima, text="", width=255, anchor="center", bg=cor3,
                    fg=cor0, font=("Ivy 1 bold"))
 app_empate.place(x=0, y=95)
 
-janela.mainloop()
+icone_pedra = Image.open("Pedra.png")
+icone_pedra = icone_pedra.resize((50, 50), Image.Resampling.LANCZOS)
+icone_pedra = ImageTk.PhotoImage(icone_pedra)
+btn_pedra = tk.Button(frame_baixo, width=50, height=50, image=icone_pedra,
+                   bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
+btn_pedra.place(x=5, y=60)
 
+icone_papel = Image.open("Papel.png")
+icone_papel = icone_papel.resize((50, 50), Image.Resampling.LANCZOS)
+icone_papel = ImageTk.PhotoImage(icone_papel)
+btn_papel = tk.Button(frame_baixo, width=50, height=50, image=icone_papel,
+                   bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
+btn_papel.place(x=50, y=60)
+
+icone_tesoura = Image.open("Tesoura.png")
+icone_tesoura = icone_tesoura.resize((50, 50), Image.Resampling.LANCZOS)
+icone_tesoura = ImageTk.PhotoImage(icone_tesoura)
+btn_tesoura = tk.Button(frame_baixo, width=50, height=50, image=icone_tesoura,
+                   bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
+btn_pedra.place(x=80, y=60)
+
+janela.mainloop()
