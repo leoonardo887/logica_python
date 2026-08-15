@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.ttk as ttk
-
+import random
 #pip install pillow
 from PIL import Image, ImageTk
 
@@ -50,7 +50,7 @@ app_pessoa = tk.Label(frame_cima, text="jogador", height=1, anchor="center",
 app_pessoa.place(x=10, y=70)
 
 #barra marcou pontos
-app_pessoa_linha = tk.Label(frame_cima, text="0", height=1, anchor="center",
+app_pessoa_linha = tk.Label(frame_cima, text="", height=10, anchor="center",
                          bg=cor4, fg=cor0, font=("Ivy 10 bold"))
 app_pessoa_linha.place(x=0, y=0)
 
@@ -71,9 +71,9 @@ app_pc = tk.Label(frame_cima, text="PC", height=1, anchor="center",
 app_pc.place(x=185, y=70)
 
 #barra marcou pontos pc
-app_pc_linha = tk.Label(frame_cima, text="0", height=1, anchor="center",
-                         bg=cor4, fg=cor0, font=("Ivy 10 bold"))
-app_pc_linha.place(x=250, y=0)
+app_pc_linha = tk.Label(frame_cima, text="", height=10, anchor="center",
+                         bg=cor5, fg=cor0, font=("Ivy 10 bold"))
+app_pc_linha.place(x=255, y=0)
 
 #pontuação pc
 app_pc_pontos = tk.Label(frame_cima, text="0", height=1, anchor="center",
@@ -85,25 +85,64 @@ app_empate = tk.Label(frame_cima, text="", width=255, anchor="center", bg=cor3,
                    fg=cor0, font=("Ivy 1 bold"))
 app_empate.place(x=0, y=95)
 
+#função de iniciar jogo.
+def iniciar_jogo():
+    global icone_pedra
+    global icone_papel
+    global icone_tesoura
+    global btn_papel
+    global btn_pedra
+    global btn_tesoura
+
+global escolha_pessoa
+global escolha_pc
+global pontos_pessoa
+global pontos_pc
+global rodadas
+pontos_pessoa = 0
+pontos_pc = 0
+rodadas = 5
+
+def terminar_jogo():
+    pass
+
+#função das jogadas
+def jogar(jogada):
+    global pontos_pessoa
+    global pontos_pc    
+    global rodadas
+    opcoes = ["pedra", "papel", "tesoura"]
+
+    if rodadas > 0:
+        print(rodadas)
+        escolha_pc = random.choice(opcoes)
+        escolha_pessoa = jogada
+        print(escolha_pessoa, escolha_pc)
+    else:
+        terminar_jogo()     #função adicionada futuramente
+
 icone_pedra = Image.open("Pedra.png")
 icone_pedra = icone_pedra.resize((50, 50), Image.Resampling.LANCZOS)
 icone_pedra = ImageTk.PhotoImage(icone_pedra)
-btn_pedra = tk.Button(frame_baixo, width=50, height=50, image=icone_pedra,
+btn_pedra = tk.Button(frame_baixo, command=lambda: jogar("pedra"), width=50, height=50, image=icone_pedra,
                    bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
-btn_pedra.place(x=5, y=60)
+btn_pedra.place(x=170, y=65)
 
 icone_papel = Image.open("Papel.png")
 icone_papel = icone_papel.resize((50, 50), Image.Resampling.LANCZOS)
 icone_papel = ImageTk.PhotoImage(icone_papel)
-btn_papel = tk.Button(frame_baixo, width=50, height=50, image=icone_papel,
+btn_papel = tk.Button(frame_baixo,command=lambda: jogar("papel"), width=50, height=50, image=icone_papel,
                    bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
-btn_papel.place(x=50, y=60)
+btn_papel.place(x=40, y=60)
 
 icone_tesoura = Image.open("Tesoura.png")
 icone_tesoura = icone_tesoura.resize((50, 50), Image.Resampling.LANCZOS)
 icone_tesoura = ImageTk.PhotoImage(icone_tesoura)
-btn_tesoura = tk.Button(frame_baixo, width=50, height=50, image=icone_tesoura,
+btn_tesoura = tk.Button(frame_baixo,command=lambda: jogar("tesoura"), width=50, height=50, image=icone_tesoura,
                    bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
-btn_pedra.place(x=80, y=60)
+btn_tesoura.place(x=110, y=60)
+
+btn_jogar = tk.Button(frame_baixo,text="Jogar", width=30, height= 1, bg=cor1, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
+btn_jogar.place(x=5,y=140)
 
 janela.mainloop()
