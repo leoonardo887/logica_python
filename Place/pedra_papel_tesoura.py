@@ -166,21 +166,21 @@ def jogar(jogada):
         terminar_jogo()     #função adicionada futuramente
 
 icone_pedra = Image.open("Pedra.png")
-icone_pedra = icone_pedra.resize((50, 50), Image.Resampling.LANCZOS)
+icone_pedra = icone_pedra.resize((50, 50), Image.LANCZOS)
 icone_pedra = ImageTk.PhotoImage(icone_pedra)
 btn_pedra = tk.Button(frame_baixo, command=lambda: jogar("pedra"), width=50, height=50, image=icone_pedra,
                    bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
 btn_pedra.place(x=170, y=65)
 
 icone_papel = Image.open("Papel.png")
-icone_papel = icone_papel.resize((50, 50), Image.Resampling.LANCZOS)
+icone_papel = icone_papel.resize((50, 50), Image.LANCZOS)
 icone_papel = ImageTk.PhotoImage(icone_papel)
 btn_papel = tk.Button(frame_baixo,command=lambda: jogar("papel"), width=50, height=50, image=icone_papel,
                    bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
 btn_papel.place(x=40, y=60)
 
 icone_tesoura = Image.open("Tesoura.png")
-icone_tesoura = icone_tesoura.resize((50, 50), Image.Resampling.LANCZOS)
+icone_tesoura = icone_tesoura.resize((50, 50), Image.LANCZOS)
 icone_tesoura = ImageTk.PhotoImage(icone_tesoura)
 btn_tesoura = tk.Button(frame_baixo,command=lambda: jogar("tesoura"), width=50, height=50, image=icone_tesoura,
                    bg=cor0, fg=cor0, compound="center", font=("Ivy 10 bold"), anchor="center", relief="flat")
