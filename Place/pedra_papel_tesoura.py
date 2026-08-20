@@ -93,7 +93,15 @@ app_jogada_pc.place(x=190, y=10)
 app_jogada_pessoa = tk.Label(frame_baixo, text="", height=1, anchor="center", bg=cor0, fg=cor1, font=("Ivy 10 bold"))
 app_jogada_pessoa.place(x=10, y=10)
 
-app_vencedor = tk.Label(frame_baixo, text="", height=1, anchor="center", bg=cor0, fg=cor1, font=("Ivy 10 bold"))
+app_vencedor = tk.Label(
+    frame_baixo,
+    text="",
+    height=1,
+    anchor="center",
+    bg=cor0,
+    fg=cor1,
+    font=("Ivy 10 bold")
+)
 
 #função de iniciar jogo.
 def iniciar_jogo():
@@ -142,18 +150,18 @@ def testa_vitoria_pc(escolha_pessoa, escolha_pc):
     return False
 
 def terminar_jogo():
+
     if pontos_pessoa > pontos_pc:
-        print("Pessoa ganhou!")
-        msg_pessoa_ganhou = tk.Label(frame_baixo, text="Você ganhou!", height=1, anchor="center", bg= cor0, fg=cor1, font=("Ivy 10 bold"))
-        msg_pessoa_ganhou.place(x=80, y=20)
+        mensagem = "Você ganhou!"
+
     elif pontos_pc > pontos_pessoa:
-        print("Você perdeu!")
-        msg_pessoa_perdeu = tk.Label(frame_baixo, text="Você perdeu!", height=1, anchor="center", bg= cor0, fg=cor1, font=("Ivy 10 bold"))
-        msg_pessoa_perdeu.place(x=80, y=20)
+        mensagem = "Você perdeu!"
+
     else:
-        ("Empate.")
-        msg_pessoa_empatou = tk.Label(frame_baixo, text="Empate!", height=1, anchor="center", bg= cor0, fg=cor1, font=("Ivy 10 bold"))
-        msg_pessoa_empatou.place(x=95, y=20)
+        mensagem = "Empate!"
+
+    app_vencedor["text"] = mensagem
+    app_vencedor.place(x=80, y=20)
 
 #função das jogadas
 def jogar(jogada):
@@ -190,8 +198,8 @@ def jogar(jogada):
             app_pc_linha["bg"] = cor2
 
         #mostrar pontos
-    else:
-        terminar_jogo()
+        if rodadas == 0:
+            terminar_jogo()
 
 icone_pedra = Image.open("Pedra.png")
 icone_pedra = icone_pedra.resize((50, 50), Image.LANCZOS)
