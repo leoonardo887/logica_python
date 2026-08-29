@@ -4,19 +4,19 @@ janela = Tk()
 janela.geometry("500x400")
 
 canvas= Canvas(janela, width=400, height=300, bg="light blue")
-
+#casa
 canvas.create_rectangle(
     250, 200, 100, 100,
     fill = 'brown',
     outline='black'
 )
-
+#porta
 canvas.create_rectangle(
     200, 145, 155, 200,
     fill = 'red',
     outline='black'
 )
-
+#telhado
 canvas.create_polygon(
     175,25,
     250,100,
@@ -25,6 +25,7 @@ canvas.create_polygon(
     outline="black"
 )
 
+#janelas
 canvas.create_rectangle(
     120, 150, 140, 170,
     fill = 'yellow',
@@ -37,6 +38,7 @@ canvas.create_rectangle(
     outline='black'
 )
 
+#grama
 canvas.create_polygon(
     0,300,
     0,200,
