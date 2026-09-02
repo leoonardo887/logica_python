@@ -3,6 +3,21 @@ from tkinter import Tk, Canvas
 from tkinter import ttk
 from tkinter import messagebox
 
+cores_canvas = {
+    "Preto": "#000000",
+    "Marrom": "#8B4513",
+    "Vermelho": "#FF0000",
+    "Laranja": "#FFA500",
+    "Amarelo": "#FFFF00",
+    "Verde": "#008000",
+    "Azul": "#0000FF",
+    "Violeta": "#800080",
+    "Cinza": "#808080",
+    "Branco": "#FFFFFF",
+    "Dourado": "#FFD700",
+    "Prata": "#C0C0C0"
+}
+
 cores = {
     "Preto": 0,
     "Marrom": 1,
@@ -30,6 +45,91 @@ tolerancias = {
 janela = Tk()
 janela.geometry("400x300")
 
+def desenhar_resistor():
+    cor1 = cores_canvas[primeira_cor.get()]
+    cor2 = cores_canvas[segunda_cor.get()]
+    cor3 = cores_canvas[terceira_cor.get()]
+    cor4 = cores_canvas[quarta_cor.get()]
+
+    # apaga o desenho anterior
+    canvas.delete("all")
+
+    # corpo do resistor
+    canvas.create_rectangle(
+        50, 50,
+        350, 100,
+        fill="light gray",
+        outline="black"
+    )
+
+    # primeira faixa
+    canvas.create_rectangle(
+        120, 50,
+        140, 100,
+        fill=cor1
+    )
+
+    # segunda faixa
+    canvas.create_rectangle(
+        160, 50,
+        180, 100,
+        fill=cor2
+    )
+
+    # terceira faixa
+    canvas.create_rectangle(
+        200, 50,
+        220, 100,
+        fill=cor3
+    )
+
+    # faixa de tolerância
+    canvas.create_rectangle(
+        280, 50,
+        300, 100,
+        fill=cor4
+    )
+
+    canvas.create_line(
+        0,
+        75,
+        50,
+        75,
+        width=5
+    )
+
+    canvas.create_line(
+        350,
+        75,
+        400,
+        75,
+        width=5
+    )
+
+def calculo():
+    x = (
+        (cores[primeira_cor.get()] * 10 + cores[segunda_cor.get()])
+        * 10 ** cores[terceira_cor.get()]
+    )
+
+    y = (f'{tolerancias[quarta_cor.get()]}')
+    if x < 1_000:
+            messagebox.showinfo(
+            "Resultado",
+            (f'{x}Ω ± {y}%')
+        )
+    elif x < 1_000_000:
+            messagebox.showinfo(
+            "Resultado",
+            (f'{x/1000}KΩ ± {y}')
+        )
+    else:
+        messagebox.showinfo(
+            "Resultado",
+            (f'{x/1000000}MΩ ± {y}%')
+        )
+
+    desenhar_resistor()  # chama a função para desenhar o resistor com as cores selecionadas
 
 # Cores
 cor0 = "#000000"  # Preto
@@ -127,7 +227,7 @@ canvas = Canvas(
     janela,
     width=400,
     height=160,
-    bg="light blue"
+    bg="white"
 )
 
 canvas.grid(
@@ -138,22 +238,35 @@ canvas.grid(
     pady=0
 )
 
-def calculo():
-    x = (
-        (cores[primeira_cor.get()] * 10 + cores[segunda_cor.get()])
-        * 10 ** cores[terceira_cor.get()]
-    )
-    messagebox.showinfo(
-        "Resultado",
-        (f'{x}Ω')
-    )
-    print(x)
+resistor = canvas.create_rectangle(
+    50,
+    50,
+    350,
+    100,
+    fill="light gray"
+)
 
-resultado = tk.Button(janela, text="Resultado:", command=calculo)
-resultado.grid(
+perna_resistor_esquerda = canvas.create_line(
+    0,
+    75,
+    50,
+    75,
+    width=5
+)
+
+perna_resistor_direita = canvas.create_line(
+    350,
+    75,
+    400,
+    75,
+    width=5
+)
+
+resultado = tk.Button(janela, text="Resultado:", command=calculo)       #falta colocar as cores do resistor no canvas
+resultado.grid(                                                         #
     row=4,
     column=0,
-    pady=0
+    pady=1
 )
 
 janela.mainloop()
