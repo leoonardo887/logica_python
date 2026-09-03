@@ -43,6 +43,7 @@ tolerancias = {
 }
 
 janela = Tk()
+janela.title("Calculadora de Resistores")
 janela.geometry("600x300")
 
 def desenhar_resistor():
