@@ -43,7 +43,7 @@ tolerancias = {
 }
 
 janela = Tk()
-janela.geometry("400x300")
+janela.geometry("600x300")
 
 def desenhar_resistor():
     cor1 = cores_canvas[primeira_cor.get()]
@@ -51,9 +51,12 @@ def desenhar_resistor():
     cor3 = cores_canvas[terceira_cor.get()]
     cor4 = cores_canvas[quarta_cor.get()]
 
+    # apaga o desenho anterior
+    canvas.delete("all")
+
     # corpo do resistor
     canvas.create_rectangle(
-        50, 50,
+        50, 40,
         350, 100,
         fill="light gray",
         outline="black"
@@ -61,28 +64,28 @@ def desenhar_resistor():
 
     # primeira faixa
     canvas.create_rectangle(
-        120, 50,
+        120, 40,
         140, 100,
         fill=cor1
     )
 
     # segunda faixa
     canvas.create_rectangle(
-        160, 50,
+        160, 40,
         180, 100,
         fill=cor2
     )
 
     # terceira faixa
     canvas.create_rectangle(
-        200, 50,
+        200, 40,
         220, 100,
         fill=cor3
     )
 
     # faixa de tolerância
     canvas.create_rectangle(
-        280, 50,
+        280, 40,
         300, 100,
         fill=cor4
     )
@@ -225,7 +228,7 @@ canvas = Canvas(
     janela,
     width=400,
     height=160,
-    bg="white"
+    bg="light blue"
 )
 
 canvas.grid(
@@ -238,7 +241,7 @@ canvas.grid(
 
 resistor = canvas.create_rectangle(
     50,
-    50,
+    40,
     350,
     100,
     fill="light gray"
@@ -265,6 +268,139 @@ resultado.grid(
     row=4,
     column=0,
     pady=5
+)
+
+#===========================================================================
+#segunda parte    800x300
+
+# Parede/divisor vertical no meio da janela
+parede = tk.Frame(
+    janela,
+    bg="black",
+    width=3
+)
+
+parede.place(
+    x=403,
+    y=-100,
+    relheight=1
+)
+
+parede_baixo = tk.Frame(
+    janela,
+    bg="black",
+    width=3
+)
+
+parede_baixo.place(
+    x=403,
+    y=200,
+    width=300,
+    height=3
+)
+
+valor_ohms = tk.Entry(janela, width=20)
+valor_ohms.grid(
+    row=2,
+    column=4,
+    padx=15,
+    pady=10
+)
+
+def resistor_por_valor():
+        
+        valor = float(valor_ohms.get())
+
+        if valor <= 0:
+            messagebox.showerror(
+                "Erro",
+                "Digite um valor maior que zero."
+            )
+            return
+
+        # Descobre o expoente da potência de 10
+        expoente = 0
+        valor_normalizado = valor
+
+        while valor_normalizado >= 100:
+            valor_normalizado /= 10
+            expoente += 1
+
+        while valor_normalizado < 10:
+            valor_normalizado *= 10
+            expoente -= 1
+
+        # Arredonda os dois primeiros algarismos
+        numero = round(valor_normalizado)
+
+        # Caso o arredondamento vire 100
+        if numero == 100:
+            numero = 10
+            expoente += 1
+
+        primeiro = numero // 10
+        segundo = numero % 10
+
+        # Verifica se pode ser representado por 4 faixas
+        if primeiro > 9 or segundo > 9 or expoente < 0 or expoente > 9:
+            messagebox.showerror(
+                "Erro",
+                "Esse valor não pode ser representado por um resistor de 4 faixas."
+            )
+            return
+
+        # Converte os números para as cores
+        numeros_para_cores = {
+            0: "Preto",
+            1: "Marrom",
+            2: "Vermelho",
+            3: "Laranja",
+            4: "Amarelo",
+            5: "Verde",
+            6: "Azul",
+            7: "Violeta",
+            8: "Cinza",
+            9: "Branco"
+        }
+
+        cor1 = numeros_para_cores[primeiro]
+        cor2 = numeros_para_cores[segundo]
+        cor3 = numeros_para_cores[expoente]
+
+        # Coloca as cores nos Combobox
+        primeira_cor.set(cor1)
+        segunda_cor.set(cor2)
+        terceira_cor.set(cor3)
+
+        # Tolerância padrão
+        quarta_cor.set("Dourado")
+
+        # Desenha o resistor
+        desenhar_resistor()
+
+botao_ohms = tk.Button(
+    janela,
+    text="Calcular cores do resistor",
+    command=resistor_por_valor
+)
+
+botao_ohms.grid(
+    row=3,
+    column=4,
+    padx=15,
+    pady=10
+)
+
+label_ohms = tk.Label(
+    janela,
+    text="Digite o valor do\n resistor em ohms (Ω):",
+    font=("Arial", 11)
+)
+label_ohms.grid(
+    row=1,
+    column=4,
+    padx=15,
+    pady=0
 )
 
 janela.mainloop()
