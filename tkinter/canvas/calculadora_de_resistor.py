@@ -104,30 +104,42 @@ def desenhar_resistor():
     )
 
 def calculo():
-    x = (
-        (cores[primeira_cor.get()] * 10 + cores[segunda_cor.get()])
-        * 10 ** cores[terceira_cor.get()]
-    )
 
-    y = (f'{tolerancias[quarta_cor.get()]}')
+    try:
+        if not all([
+            primeira_cor.get(),
+            segunda_cor.get(),
+            terceira_cor.get(),
+            quarta_cor.get()
+        ]):
+            raise ValueError("Selecione todas as quatro cores.")
 
-    desenhar_resistor()  # chama a função para desenhar o resistor com as cores selecionadas
+        x = (
+            (cores[primeira_cor.get()] * 10 + cores[segunda_cor.get()])
+            * 10 ** cores[terceira_cor.get()]
+        )
 
-    if x < 1_000:
+        y = (f'{tolerancias[quarta_cor.get()]}')
+
+        desenhar_resistor()  # chama a função para desenhar o resistor com as cores selecionadas
+
+        if x < 1_000:
+                messagebox.showinfo(
+                "Resultado",
+                (f'{x}Ω ± {y}%')
+            )
+        elif x < 1_000_000:
+                messagebox.showinfo(
+                "Resultado",
+                (f'{x/1000}KΩ ± {y}')
+            )
+        else:
             messagebox.showinfo(
-            "Resultado",
-            (f'{x}Ω ± {y}%')
-        )
-    elif x < 1_000_000:
-            messagebox.showinfo(
-            "Resultado",
-            (f'{x/1000}KΩ ± {y}')
-        )
-    else:
-        messagebox.showinfo(
-            "Resultado",
-            (f'{x/1000000}MΩ ± {y}%')
-        )
+                "Resultado",
+                (f'{x/1000000}MΩ ± {y}%')
+            )
+    except ValueError as ve:
+        messagebox.showerror("Erro", str(ve))
 
 # Cores
 cor0 = "#000000"  # Preto
