@@ -284,7 +284,7 @@ resultado.grid(
 )
 
 #===========================================================================
-#segunda parte    800x300
+#segunda parte
 
 # Parede/divisor vertical no meio da janela
 parede = tk.Frame(
@@ -415,5 +415,6 @@ label_ohms.grid(
     padx=15,
     pady=0
 )
+
 
 janela.mainloop()
