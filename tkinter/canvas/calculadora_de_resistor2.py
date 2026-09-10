@@ -47,7 +47,7 @@ janela.title("Calculadora de Resistores")
 janela.geometry("600x300")
 
 def desenhar_resistor():
-    cor1 = cores_canvas[primeira_cor.get()]
+    cor1 = cores_canvas[primeira_cor.get()]         #pega o resultado da combobox e chama ele de cor1, cor2,...
     cor2 = cores_canvas[segunda_cor.get()]
     cor3 = cores_canvas[terceira_cor.get()]
     cor4 = cores_canvas[quarta_cor.get()]
@@ -174,6 +174,7 @@ primeira_cor.grid(
     padx=0,
     pady=0
 )
+
 #combobox da segunda cor
 segunda_cor = ttk.Combobox(
     janela,
@@ -209,6 +210,7 @@ quarta_cor.grid(
     column=0,
     pady=10
 )
+
 #labels de mensagem
 label_1 = tk.Label(janela, text="Selecione a primeira cor do resistor. ", font=("Arial", 11))
 label_1.grid(
@@ -323,74 +325,120 @@ valor_ohms.grid(
 
 def resistor_por_valor():
         
-        valor = float(valor_ohms.get())
+        try:
+            valor = float(valor_ohms.get())
 
-        if valor <= 0:
+            if valor <= 0:
+                messagebox.showerror(
+                    "Erro",
+                    "Digite um valor maior que zero."
+                )
+                return
+
+            # Descobre o expoente da potência de 10
+            expoente = 0
+            valor_normalizado = valor
+
+            while valor_normalizado >= 100:
+                valor_normalizado /= 10
+                expoente += 1
+
+            while valor_normalizado < 10:
+                valor_normalizado *= 10
+                expoente -= 1
+
+            # Arredonda os dois primeiros algarismos
+            numero = round(valor_normalizado)
+
+            # Caso o arredondamento vire 100
+            if numero == 100:
+                numero = 10
+                expoente += 1
+
+            primeiro = numero // 10
+            segundo = numero % 10
+
+            # Verifica se pode ser representado por 4 faixas
+            if primeiro > 9 or segundo > 9 or expoente < 0 or expoente > 9:
+                messagebox.showerror(
+                    "Erro",
+                    "Esse valor não pode ser representado por um resistor de 4 faixas."
+                )
+                return
+
+            # Converte os números para as cores
+            numeros_para_cores = {
+                0: "Preto",
+                1: "Marrom",
+                2: "Vermelho",
+                3: "Laranja",
+                4: "Amarelo",
+                5: "Verde",
+                6: "Azul",
+                7: "Violeta",
+                8: "Cinza",
+                9: "Branco"
+            }
+
+            cor1 = numeros_para_cores[primeiro]
+            cor2 = numeros_para_cores[segundo]
+            cor3 = numeros_para_cores[expoente]
+
+            # Coloca as cores nos Combobox
+            primeira_cor.set(cor1)
+            segunda_cor.set(cor2)
+            terceira_cor.set(cor3)
+
+            # Tolerância escolhida no lado direito
+            tolerancia_escolhida = quarta_cor_tolerancia.get()
+
+            # Coloca a tolerância escolhida na Combobox do lado esquerdo
+            quarta_cor.set(tolerancia_escolhida)
+
+            # Pega o valor da tolerância
+            valor_tolerancia = tolerancias[tolerancia_escolhida]
+
+            # Atualiza o Label do lado direito
+            valor_tolerancia_label.config(
+                text=f"Tolerância: ±{valor_tolerancia}%"
+            )
+
+            # Desenha o resistor
+            desenhar_resistor()
+
+        except ValueError:
             messagebox.showerror(
                 "Erro",
-                "Digite um valor maior que zero."
+                "Digite um valor válido em ohms."
             )
-            return
 
-        # Descobre o expoente da potência de 10
-        expoente = 0
-        valor_normalizado = valor
+#combobox tolerancia
+quarta_cor_tolerancia = ttk.Combobox(
+    janela,
+    width=17,
+    values=list(tolerancias.keys())
+)
 
-        while valor_normalizado >= 100:
-            valor_normalizado /= 10
-            expoente += 1
+quarta_cor_tolerancia.grid(
+    row=3,
+    column=4,
+    pady=5
+)
 
-        while valor_normalizado < 10:
-            valor_normalizado *= 10
-            expoente -= 1
 
-        # Arredonda os dois primeiros algarismos
-        numero = round(valor_normalizado)
+# Label que informa a tolerância escolhida no lado direito
+valor_tolerancia_label = tk.Label(
+    janela,
+    text="Tolerância: --",
+    font=("Arial", 11)
+)
 
-        # Caso o arredondamento vire 100
-        if numero == 100:
-            numero = 10
-            expoente += 1
+valor_tolerancia_label.grid(
+    row=5,
+    column=4,
+    pady=5
+)
 
-        primeiro = numero // 10
-        segundo = numero % 10
-
-        # Verifica se pode ser representado por 4 faixas
-        if primeiro > 9 or segundo > 9 or expoente < 0 or expoente > 9:
-            messagebox.showerror(
-                "Erro",
-                "Esse valor não pode ser representado por um resistor de 4 faixas."
-            )
-            return
-
-        # Converte os números para as cores
-        numeros_para_cores = {
-            0: "Preto",
-            1: "Marrom",
-            2: "Vermelho",
-            3: "Laranja",
-            4: "Amarelo",
-            5: "Verde",
-            6: "Azul",
-            7: "Violeta",
-            8: "Cinza",
-            9: "Branco"
-        }
-
-        cor1 = numeros_para_cores[primeiro]
-        cor2 = numeros_para_cores[segundo]
-        cor3 = numeros_para_cores[expoente]
-
-        # Coloca as cores nos Combobox
-        primeira_cor.set(cor1)
-        segunda_cor.set(cor2)
-        terceira_cor.set(cor3)
-
-        # Tolerância padrão
-        quarta_cor.set("Dourado")
-
-        # Desenha o resistor
-        desenhar_resistor()
 
 botao_ohms = tk.Button(
     janela,
@@ -399,10 +447,10 @@ botao_ohms = tk.Button(
 )
 
 botao_ohms.grid(
-    row=3,
+    row=4,
     column=4,
     padx=15,
-    pady=10
+    pady=5,
 )
 
 label_ohms = tk.Label(
@@ -410,12 +458,12 @@ label_ohms = tk.Label(
     text="Digite o valor do\n resistor em ohms (Ω):",
     font=("Arial", 11)
 )
+
 label_ohms.grid(
     row=1,
     column=4,
     padx=15,
     pady=0
 )
-
 
 janela.mainloop()
