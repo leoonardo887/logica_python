@@ -175,14 +175,12 @@ def jogar(jogada):
     app_empate["bg"] = cor1
 
     if rodadas > 0:
-        print(rodadas)
         escolha_pc = random.choice(opcoes)
         escolha_pessoa = jogada
         app_jogada_pc["text"] = escolha_pc
 
         escolha_pessoa = jogada
         app_jogada_pessoa["text"] = escolha_pessoa
-        print(escolha_pessoa, escolha_pc)
         rodadas -= 1
 
         #caso empate
