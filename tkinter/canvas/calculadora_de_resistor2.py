@@ -45,6 +45,7 @@ tolerancias = {
 janela = Tk()
 janela.title("Calculadora de Resistores")
 janela.geometry("600x300")
+janela.resizable(False, False)
 
 def desenhar_resistor():
     cor1 = cores_canvas[primeira_cor.get()]         #pega o resultado da combobox e chama ele de cor1, cor2,...
