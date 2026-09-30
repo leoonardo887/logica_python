@@ -6,12 +6,9 @@ from tkinter import messagebox
 
 janela = Tk()
 janela.title("Caixa Eletrônico")
+janela.config(bg="#0A3352")         #COR DE FUNDO DA JANELA
 janela.geometry("500x600")
 janela.resizable(False, False)
-
-# Cor de fundo da janela
-janela.configure(bg="white")
-
 
 #função para limpar tudo da janela
 def limpar_tela():
@@ -19,13 +16,75 @@ def limpar_tela():
     for widget in janela.winfo_children():
         widget.destroy()
 
-# titúlo
+#função do menu principal
+def menu():
+
+    limpar_tela()
+
+    tk.Label(
+        janela,
+        text="Menu Principal",
+        font=("Arial", 20, "bold"),
+        fg="white",
+        bg="#0A3352"
+    ).pack(pady=40)
+
+    tk.Label(
+        janela,
+        text="Escolha uma opção:",
+        font=("Arial", 14),
+        fg="white",
+        bg="#0A3352"
+    ).pack(pady=10)
+
+    tk.Button(
+        janela,
+        text="Consultar saldo",
+        font=("Arial", 12, "bold"),
+        bg="#1976D2",
+        fg="white",
+        width=20,
+        height=2
+    ).pack(pady=10)
+
+    tk.Button(
+        janela,
+        text="Depositar dinheiro",
+        font=("Arial", 12, "bold"),
+        bg="#1976D2",
+        fg="white",
+        width=20,
+        height=2
+    ).pack(pady=10)
+
+    tk.Button(
+        janela,
+        text="Sacar dinheiro",
+        font=("Arial", 12, "bold"),
+        bg="#1976D2",
+        fg="white",
+        width=20,
+        height=2
+    ).pack(pady=10)
+
+    tk.Button(
+        janela,
+        text="Sair",
+        font=("Arial", 12, "bold"),
+        bg="#D32F2F",
+        fg="white",
+        width=20,
+        height=2
+    ).pack(pady=10)
+
+
+# titulo
 tk.Label(
     janela,
     text="Bem-vindo ao Caixa Eletrônico!",
     font=("Arial", 20, "bold"),
-    fg="black",
-    bg="white"
+    fg="white",
+    bg="#0A3352"
 ).pack(pady=40)
 
 
@@ -34,8 +93,8 @@ tk.Label(
     janela,
     text="Digite sua conta:",
     font=("Arial", 12),
-    fg="black",
-    bg="white"
+    fg="white",
+    bg="#0A3352"
 ).pack()
 
 entrada_conta = tk.Entry(
@@ -52,8 +111,8 @@ tk.Label(
     janela,
     text="Digite sua senha:",
     font=("Arial", 12),
-    fg="black",
-    bg="white"
+    fg="white",
+    bg="#0A3352"
 ).pack(pady=5)
 
 entrada_senha = tk.Entry(
@@ -90,8 +149,8 @@ def entrar():
             "Login",
             "Entrada realizada com sucesso!"
         )
-        limpar_tela()
-        #menu()                     #criar função menu, onde mostra "consultar saldo", "depositar dinheiro", "sacar dinheiro", e "sair"
+
+        menu()                     #criar função menu, onde mostra "consultar saldo", "depositar dinheiro", "sacar dinheiro", e "sair"
 
 #botão entrar
 tk.Button(
@@ -104,7 +163,5 @@ tk.Button(
     height=2,
     command=entrar
 ).pack(pady=30)
-
-
 
 janela.mainloop()
