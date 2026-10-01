@@ -10,6 +10,9 @@ janela.config(bg="#0A3352")         #COR DE FUNDO DA JANELA
 janela.geometry("500x600")
 janela.resizable(False, False)
 
+saldo = 1000
+conta = ""
+
 #função para limpar tudo da janela
 def limpar_tela():
 
@@ -23,11 +26,19 @@ def menu():
 
     tk.Label(
         janela,
-        text="Menu Principal",
+        text=f"Conta: {conta}",
+        font=("Arial", 10, "bold"),
+        fg="white",
+        bg="#0A3352"
+    ).pack(pady=30)
+
+    tk.Label(
+        janela,
+        text="Menu Principal!",
         font=("Arial", 20, "bold"),
         fg="white",
         bg="#0A3352"
-    ).pack(pady=40)
+    ).pack(pady=20)
 
     tk.Label(
         janela,
@@ -42,6 +53,7 @@ def menu():
         text="Consultar saldo",
         font=("Arial", 12, "bold"),
         bg="#1976D2",
+        command=consultar_saldo,
         fg="white",
         width=20,
         height=2
@@ -73,10 +85,28 @@ def menu():
         font=("Arial", 12, "bold"),
         bg="#D32F2F",
         fg="white",
+        command=quit,
         width=20,
         height=2
     ).pack(pady=10)
 
+
+#==========FUNÇÕES PARA OS BOTÕES DO MENU==========
+
+def consultar_saldo():
+
+    messagebox.showinfo(
+        "Consultar saldo",
+        f"Seu saldo atual é: R$ {saldo},00"
+    )
+
+    #para o botão de sair foi só adicionar o command=quit
+
+
+def depositar_dinheiro():
+    pass
+def sacar_dinheiro():
+    pass
 
 # titulo
 tk.Label(
@@ -129,6 +159,8 @@ entrada_senha.pack(pady=10)
 #função entrar
 def entrar():
 
+    global conta
+
     conta = entrada_conta.get()
     senha = entrada_senha.get()
 
@@ -149,7 +181,6 @@ def entrar():
             "Login",
             "Entrada realizada com sucesso!"
         )
-
         menu()                     #criar função menu, onde mostra "consultar saldo", "depositar dinheiro", "sacar dinheiro", e "sair"
 
 #botão entrar
@@ -164,4 +195,7 @@ tk.Button(
     command=entrar
 ).pack(pady=30)
 
+
 janela.mainloop()
+
+#falta criar as funções dos botoes de depositar e sacar dinheiro, mexer na aparência dos menus, informar as cédulas entregues ao usuário, ou seja, o valor tem que ser divisivel por 2 ou 5 para dar certo. 
