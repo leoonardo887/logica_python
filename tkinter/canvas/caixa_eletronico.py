@@ -65,6 +65,7 @@ def menu():
         font=("Arial", 12, "bold"),
         bg="#1976D2",
         fg="white",
+        command=depositar_dinheiro,
         width=20,
         height=2
     ).pack(pady=10)
@@ -104,8 +105,52 @@ def consultar_saldo():
 
 
 def depositar_dinheiro():
+
+    limpar_tela()
+
+    tk.Label(
+        janela,
+        text=f"Conta: {conta}",
+        font=("Arial", 10, "bold"),
+        fg="white",
+        bg="#0A3352"
+    ).pack(pady=30)
+
+    tk.Label(
+        janela,
+        text="Depósito",
+        font=("Arial", 20, "bold"),
+        fg="white",
+        bg="#0A3352"
+    ).pack(pady=20)
+
+    tk.Label(
+        janela,
+        text="Digite quanto queira depositar:",
+        font=("Arial", 14),
+        fg="white",
+        bg="#0A3352"
+    ).pack(pady=10)
+
+    valor = tk.Entry(
+        janela,
+        
+    )
+
+    tk.Button(
+        janela,
+        text="Depositar",
+        font=("Arial", 12, "bold"),
+        bg="#1976D2",
+        fg="white",
+        width=20,
+        height=2
+    ).pack(pady=10)
+
+
+
     pass
-def sacar_dinheiro():
+def sacar_dinheiro():               #fazer!!!!!
     pass
 
 # titulo
