@@ -134,8 +134,12 @@ def depositar_dinheiro():
 
     valor = tk.Entry(
         janela,
-        
+        font=("Arial", 14),
+        width=25,
+        justify="center"
     )
+
+    valor.pack(pady=10)
 
     tk.Button(
         janela,
@@ -143,13 +147,26 @@ def depositar_dinheiro():
         font=("Arial", 12, "bold"),
         bg="#1976D2",
         fg="white",
+        command=lambda: somar_deposito(valor),
         width=20,
         height=2
     ).pack(pady=10)
 
+def somar_deposito(valor):
+
+    global saldo
+
+    valor = float(valor.get())
+    saldo += valor
+
+    messagebox.showinfo(
+        "Depósito aplicado com sucesso!",
+        f"Agora seu saldo é R$ {saldo:.2f}"
+    )
+
+    menu()
 
 
-    pass
 def sacar_dinheiro():               #fazer!!!!!
     pass
 
