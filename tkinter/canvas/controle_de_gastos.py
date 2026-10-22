@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter import ttk, messagebox
 import json
@@ -19,16 +18,17 @@ BRANCO = "#FFFFFF"
 
 # CARREGAR DADOS
 def carregar_dados():
-    if not os.path.exists(ARQUIVO):
-        salvar_dados()
+    if not os.path.exists(ARQUIVO):     # verifica se o arquivo existe.
+        salvar_dados()                  #se não, ele cria o arquivo
         return
 
     try:
         with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
             dados = json.load(arquivo)
 
-        if isinstance(dados, list):
-            movimentacoes.extend(dados)
+        if isinstance(dados, list):             #O programa verifica se os dados são uma lista.
+            movimentacoes.extend(dados)         #Se forem, coloca todas as movimentações encontradas dentro da lista movimentacoes.
+                                                #Assim, os registros aparecem novamente no programa.
         else:
             messagebox.showerror(
                 "Erro", "O arquivo JSON não contém uma lista válida."
@@ -41,14 +41,14 @@ def carregar_dados():
 
 
 # SALVAR DADOS
-def salvar_dados():
+def salvar_dados():         #responsável por salvar os dados em um arquivo
     try:
         with open(ARQUIVO, "w", encoding="utf-8") as arquivo:
             json.dump(
-                movimentacoes,
-                arquivo,
-                ensure_ascii=False,
-                indent=4
+                movimentacoes,                      #o que vai guardar
+                arquivo,                            #lugar onde vai guardar
+                ensure_ascii=False,                 #mantém os caracteres especiais legíveis
+                indent=4                            #organiza
             )
         return True
 
@@ -63,7 +63,7 @@ def salvar_dados():
 def dinheiro(valor):
     texto = f"{valor:,.2f}"
     texto = texto.replace(",", "X")
-    texto = texto.replace(".", ",")
+    texto = texto.replace(".", ",")         #organizar como dinheiro aparecerá na janela
     texto = texto.replace("X", ".")
     return f"R$ {texto}"
 
@@ -71,8 +71,7 @@ def dinheiro(valor):
 # GERAR IDENTIFICADOR
 def gerar_id():
     if not movimentacoes:
-        return 1
-
+        return 1                                           #cálculo de ordem das movimentações
     return max(item["id"] for item in movimentacoes) + 1
 
 
@@ -82,7 +81,7 @@ def calcular_saldo():
 
     for item in movimentacoes:
         if item["tipo"] == "Receita":
-            saldo += item["valor"]
+            saldo += item["valor"]                    #fórmula do saldo
         elif item["tipo"] == "Despesa":
             saldo -= item["valor"]
 
@@ -95,12 +94,11 @@ def atualizar_saldo():
     texto_saldo.config(text=dinheiro(saldo))
 
     if saldo < 0:
-        texto_saldo.config(fg=VERMELHO)
+        texto_saldo.config(fg=VERMELHO)             #caso o saldo esteja negativo, o saldo aparece vermelho na janela, caso contrário, verde.
     else:
         texto_saldo.config(fg=VERDE)
 
 
-# ATUALIZAR TABELA
 def atualizar_tabela():
     for item in tabela.get_children():
         tabela.delete(item)
@@ -469,5 +467,5 @@ tk.Label(
 # EXIBIR DADOS INICIAIS
 atualizar_tabela()
 
-# MANTER A JANELA ABERTA
+
 janela.mainloop()
