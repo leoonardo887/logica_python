@@ -100,15 +100,15 @@ def atualizar_saldo():
 
 
 def atualizar_tabela():
-    for item in tabela.get_children():
-        tabela.delete(item)
+    for item in tabela.get_children():  #pega os itens que já estão na tabela.
+        tabela.delete(item)             #apaga cada item antigo da tabela para evitar duplicações.
 
-    for item in movimentacoes:
-        tabela.insert(
+    for item in movimentacoes:          #percorre todas as movimentações salvas na lista.
+        tabela.insert(                  #insere as informações na tabela
             "",
-            "end",
-            iid=str(item["id"]),
-            values=(
+            "end",                      #indica que o item será colocado no final
+            iid=str(item["id"]),        #indica o id de cada um: 1, 2,...
+            values=(                    #itens
                 item["id"],
                 item["data"],
                 item["tipo"],
@@ -121,7 +121,7 @@ def atualizar_tabela():
 
 
 # LIMPAR CAMPOS
-def limpar_campos():
+def limpar_campos():                        #Essa função limpa os campos do formulário depois de cadastrar uma movimentação.
     entrada_descricao.delete(0, tk.END)
     entrada_valor.delete(0, tk.END)
     entrada_descricao.focus()
@@ -462,7 +462,6 @@ tk.Label(
     fg="#64748B",
     font=("Arial", 9)
 ).pack(pady=(0, 10))
-
 
 # EXIBIR DADOS INICIAIS
 atualizar_tabela()
