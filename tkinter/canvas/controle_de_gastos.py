@@ -130,7 +130,7 @@ def limpar_campos():                        #Essa função limpa os campos do fo
 # ADICIONAR RECEITA OU DESPESA
 def adicionar_movimentacao():
     descricao = entrada_descricao.get().strip()
-    valor_texto = entrada_valor.get().strip().replace(",", ".")
+    valor_texto = entrada_valor.get().strip().replace(",", ".")     #troca a vírgula por ponto, permitindo digitar, por exemplo, 25,50.
     tipo = escolha_tipo.get()
 
     if not descricao:
@@ -169,7 +169,7 @@ def adicionar_movimentacao():
         )
         return
 
-    movimentacao = {
+    movimentacao = {                            #como vai ficar o dicionario
         "id": gerar_id(),
         "descricao": descricao,
         "valor": valor,
@@ -177,7 +177,7 @@ def adicionar_movimentacao():
         "data": datetime.now().strftime("%d/%m/%Y %H:%M")
     }
 
-    movimentacoes.append(movimentacao)
+    movimentacoes.append(movimentacao)        #adiciona o dicionário à lista
 
     if salvar_dados():
         atualizar_tabela()
@@ -227,7 +227,7 @@ def excluir_movimentacao():
 
 
 # GERAR RELATÓRIO
-def gerar_relatorio():
+def gerar_relatorio():          #relatório de todos os ganhos e gastos
     total_receitas = 0
     total_despesas = 0
 
