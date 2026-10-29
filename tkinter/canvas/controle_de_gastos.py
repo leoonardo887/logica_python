@@ -262,7 +262,7 @@ janela.configure(bg=FUNDO)
 carregar_dados()
 
 
-# CABEÇALHO
+# CABEÇALHO                                                             parte de cima da janela
 cabecalho = tk.Frame(janela, bg=AZUL, height=90)
 cabecalho.pack(fill="x")
 cabecalho.pack_propagate(False)
@@ -288,12 +288,12 @@ tk.Label(
 principal = tk.Frame(janela, bg=FUNDO)
 principal.pack(fill="both", expand=True, padx=20, pady=15)
 
-principal.columnconfigure(0, weight=1)
-principal.columnconfigure(1, weight=3)
+principal.columnconfigure(0, weight=1)          #dividida em colunas
+principal.columnconfigure(1, weight=3)          #aqui é criada a área na esquerda para depois virar um painel
 principal.rowconfigure(0, weight=1)
 
 
-# PAINEL DE CADASTRO
+# PAINEL DE CADASTRO                            #painel da esquerda da janela
 painel = tk.LabelFrame(
     principal,
     text=" Nova movimentação ",
@@ -332,7 +332,7 @@ escolha_tipo.pack(fill="x", pady=(0, 15))
 escolha_tipo.set("Receita")
 
 
-# BOTÃO CADASTRAR
+                                                # BOTÃO CADASTRAR
 tk.Button(
     painel,
     text="Adicionar movimentação",
@@ -348,7 +348,7 @@ tk.Button(
 ).pack(fill="x", pady=(0, 10))
 
 
-# BOTÃO EXCLUIR
+                                                # BOTÃO EXCLUIR
 tk.Button(
     painel,
     text="Excluir selecionada",
@@ -364,7 +364,7 @@ tk.Button(
 ).pack(fill="x", pady=(0, 10))
 
 
-# BOTÃO RELATÓRIO
+                                                # BOTÃO RELATÓRIO
 tk.Button(
     painel,
     text="Gerar relatório",
@@ -380,7 +380,7 @@ tk.Button(
 ).pack(fill="x", pady=(0, 15))
 
 
-# PAINEL DA TABELA E DO SALDO
+                                                # PAINEL DA TABELA E DO SALDO
 painel_direito = tk.Frame(principal, bg=FUNDO)
 painel_direito.grid(row=0, column=1, sticky="nsew")
 painel_direito.rowconfigure(1, weight=1)
@@ -454,7 +454,7 @@ tabela.grid(row=0, column=0, sticky="nsew")
 barra.grid(row=0, column=1, sticky="ns")
 
 
-# RODAPÉ
+
 tk.Label(
     janela,
     text="Os dados são salvos automaticamente em movimentacoes.json",
