@@ -12,5 +12,12 @@
         "valor": 500.0,
         "tipo": "Despesa",
         "data": "19/10/2026 20:36"
+    },
+    {
+        "id": 3,
+        "descricao": "luz",
+        "valor": 230.0,
+        "tipo": "Despesa",
+        "data": "28/10/2026 21:37"
     }
 ]
