@@ -174,7 +174,7 @@ def adicionar_movimentacao():
         "descricao": descricao,
         "valor": valor,
         "tipo": tipo,
-        "data": datetime.now().strftime("%d/%m/%Y %H:%M")
+        "data": datetime.now().strftime("%d/%m/%Y %H:%M")               #pega o dia e o horário pra pôr na tabela
     }
 
     movimentacoes.append(movimentacao)        #adiciona o dicionário à lista
