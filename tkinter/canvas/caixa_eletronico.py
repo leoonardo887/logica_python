@@ -16,6 +16,35 @@ conta = ""
 ARQUIVO_CONTAS = "contas_caixa.txt"
 
 
+def criar_conta():
+    
+    numero_conta = entrada_conta.get()
+    senha = entrada_senha.get()
+
+    if numero_conta == "" or senha == "":
+        messagebox.showerror(
+            "Erro",
+            "Preencha todos os campos."
+        )
+        return
+
+    if numero_conta in contas:
+        messagebox.showerror(
+            "Erro",
+            "Essa conta já existe."
+        )
+        return
+
+    contas[numero_conta] = 1000.0
+
+    salvar_contas()
+
+    messagebox.showinfo(
+        "Sucesso",
+        "Conta criada com sucesso!\n"
+        "Saldo inicial: R$ 1.000,00"
+    )
+
 def carregar_contas():
     
     contas = {}
@@ -122,7 +151,7 @@ def menu():
         relief="flat",
         cursor="hand2"
     ).pack(pady=6)
-
+    
     tk.Button(
         janela,
         text="💸  Sacar dinheiro",
@@ -489,6 +518,17 @@ tk.Label(
     bg="#0A3352"
 ).pack(pady=(35, 5))
 
+tk.Button(
+    janela,
+    text="📝  CRIAR CONTA",
+    font=("Arial", 12, "bold"),
+    bg="#00897B",
+    fg="white",
+    width=22,
+    height=2,
+    relief="flat",
+    command=criar_conta
+).pack(pady=5)
 
 tk.Label(
     janela,
@@ -621,10 +661,8 @@ tk.Button(
     width=22,
     height=2,
     relief="flat",
-    cursor="hand2",
     command=entrar
 ).pack(pady=25)
-
 
 
 janela.mainloop()
