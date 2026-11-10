@@ -1,0 +1,9 @@
+[
+    {
+        "codigo": 564321,
+        "nome": "leite",
+        "quantidade": 60,
+        "estoque_minimo": 20,
+        "preco": 6.0
+    }
+]
