@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import json
+from tkinter import ttk
 
 janela = tk.Tk()
 janela.title("Controle de Estoque")
@@ -55,7 +56,6 @@ produtos = carregar_produtos()
 
 
 # CADASTRAR PRODUTO
-
 def cadastrar_produto():
 
     # Pegando os valores digitados
@@ -156,6 +156,46 @@ def cadastrar_produto():
     entrada_preco.delete(0, tk.END)
 
 
+def listar_produtos():
+    
+    janela_lista = tk.Toplevel(janela)
+    janela_lista.title("Lista de Produtos")
+    janela_lista.geometry("650x350")
+
+    tabela = ttk.Treeview(
+        janela_lista,
+        columns=(
+            "codigo",
+            "nome",
+            "quantidade",
+            "minimo",
+            "preco"
+        ),
+        show="headings"
+    )
+
+    tabela.heading("codigo", text="Código")
+    tabela.heading("nome", text="Nome")
+    tabela.heading("quantidade", text="Quantidade")
+    tabela.heading("minimo", text="Estoque Mínimo")
+    tabela.heading("preco", text="Preço")
+
+    tabela.pack(fill="both", expand=True)
+
+    for produto in produtos:
+
+        tabela.insert(
+            "",
+            tk.END,
+            values=(
+                produto["codigo"],
+                produto["nome"],
+                produto["quantidade"],
+                produto["estoque_minimo"],
+                produto["preco"]
+            )
+        )
+
 # TÍTULO
 titulo = tk.Label(
     janela,
@@ -226,5 +266,13 @@ botao_cadastrar = tk.Button(
 
 botao_cadastrar.pack(pady=25)
 
+botao_listar = tk.Button(
+    janela,
+    text="Listar Produtos",
+    font=("Arial", 12, "bold"),
+    command=listar_produtos
+)
+
+botao_listar.pack(pady=10)
 
 janela.mainloop()
