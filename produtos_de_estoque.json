@@ -5,5 +5,19 @@
         "quantidade": 60,
         "estoque_minimo": 20,
         "preco": 6.0
+    },
+    {
+        "codigo": 879654,
+        "nome": "pão",
+        "quantidade": 500,
+        "estoque_minimo": 80,
+        "preco": 1.0
+    },
+    {
+        "codigo": 754653,
+        "nome": "arroz",
+        "quantidade": 100,
+        "estoque_minimo": 25,
+        "preco": 6.0
     }
 ]
