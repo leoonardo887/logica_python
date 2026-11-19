@@ -924,7 +924,6 @@ def preencher_campos(event):
 
 
 # CONFIGURAÇÃO VISUAL
-
 janela.configure(bg="#F1F4F9")
 
 estilo = ttk.Style()
@@ -1005,7 +1004,6 @@ estilo.configure(
 
 
 # CABEÇALHO
-
 cabecalho = tk.Frame(
     janela,
     bg="#172B4D",
@@ -1031,7 +1029,6 @@ tk.Label(
 
 
 # ÁREA PRINCIPAL
-
 area_principal = tk.Frame(
     janela,
     bg="#F1F4F9"
@@ -1045,7 +1042,6 @@ area_principal.pack(
 
 
 # CARTÃO DE CADASTRO
-
 cartao_cadastro = tk.Frame(
     area_principal,
     bg="white",
@@ -1124,7 +1120,6 @@ cartao_cadastro.columnconfigure(1, weight=1)
 
 
 # BOTÕES DE CADASTRO
-
 ttk.Button(
     cartao_cadastro,
     text="Cadastrar Produto",
@@ -1168,7 +1163,6 @@ ttk.Button(
 
 
 # CARTÃO DE MOVIMENTAÇÕES
-
 cartao_movimento = tk.Frame(
     area_principal,
     bg="white",
@@ -1245,7 +1239,6 @@ ttk.Button(
 
 
 # CARTÃO DE CONSULTAS
-
 cartao_consulta = tk.Frame(
     area_principal,
     bg="white",
@@ -1318,7 +1311,6 @@ ttk.Button(
 
 
 # BOTÃO PARA LISTAR TODOS OS PRODUTOS
-
 ttk.Button(
     cartao_consulta,
     text="Listar Todos os Produtos",
@@ -1335,7 +1327,6 @@ ttk.Button(
 
 
 # TABELA PRINCIPAL
-
 cartao_tabela = tk.Frame(
     area_principal,
     bg="white",
@@ -1387,7 +1378,6 @@ tabela_principal.bind(
 
 
 # BOTÕES DE RELATÓRIO
-
 quadro_botoes = tk.Frame(
     area_principal,
     bg="#F1F4F9"
@@ -1428,10 +1418,9 @@ ttk.Button(
 
 
 # RODAPÉ
-
 tk.Label(
     janela,
-    text="Sistema de Controle de Estoque | Desenvolvido em Python",
+    text="Sistema de Controle de Estoque",
     bg="#F1F4F9",
     fg="#64748B",
     font=("Arial", 9)
