@@ -19,5 +19,12 @@
         "quantidade": 100,
         "estoque_minimo": 25,
         "preco": 6.0
+    },
+    {
+        "codigo": 64543,
+        "nome": "farofa",
+        "quantidade": 20,
+        "estoque_minimo": 30,
+        "preco": 4.0
     }
 ]
